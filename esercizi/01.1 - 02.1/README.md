@@ -80,3 +80,10 @@
 >       </li>
 >     </ul>
 >     ```
+
+# Esercizio 02.1
+> ```css
+>   ul {
+>     list-style: none;
+>   }
+> ```
