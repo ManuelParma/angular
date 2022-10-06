@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
+  macchine = ['Ruspa', 'Autocarro', 'Gru', 'Terna', 'Rullo Compattatore', 'Finitrice', 'Battipali', 'Piastra Vibrante', 'Bulldozer', 'Dumper'];
+
   constructor() { }
 
   ngOnInit(): void {
