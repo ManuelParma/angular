@@ -1,0 +1,45 @@
+<div>
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <h2>
+    1) Scegli un disco dall'elenco
+  </h2>
+  <!--Questo codice serve a generare una comb box. selectedOption contiene il titolo della canzone
+  selezionata poichè in [value] abbiamo scelto di usare il titolo dell'album -->
+  <select [(ngModel)]="selectedOption" class="form-control input-group">
+    <option [value]="album.title" class="form-control input-group" *ngFor="let album of albums"> {{album.title}}</option>
+  </select> <br>
+
+  <!--Questo codice stampa il titolo dell'album selezionato
+  Serve solo a scopo di debug, puoi eliminarlo dall'applicazione finale-->
+  {{selectedOption}}
+
+  <hr>
+
+  <!--Questo codice visualizza il testo 2 e la form solo se selectedOption è definito (diverso da undefined)-->
+  <div *ngIf="selectedOption">
+    <h3>
+      2) Ora seleziona una canzone da aggiungere all'album selezionato
+    </h3>
+
+
+    <!--Premendo prenota si inviano le informazioni sulla canzone al metodo onClick-->
+    <form>
+      <input #t class="form-control input-group" placeholder="titolo"> <br>
+      <input #l class="form-control input-group" placeholder="durata"> <br>
+      <input type="date" #d class="form-control input-group"> : pubblicazione<br>
+      <button (click)="onClick(t,d,l)" class="btn btn-primary"> Aggiungi canzone </button>
+    </form>
+  </div>
+
+  <!-- {{songList | json}} -->
+  <div class="container">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let song of songList">
+        {{song.title}}
+        <button class="btn btn-primary">Preferito</button>
+      </li>
+    </ul>
+  </div>

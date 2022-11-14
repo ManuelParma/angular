@@ -1,5 +1,10 @@
-<h2>Basic Request</h2>
-<button type="button" (click)="makeCRequest()">Make Request</button>
-<div *ngIf="loading">loading...</div>
-<pre>{{data | json}}</pre>
-<button type="button" (click)="makeCPost()">Make Post</button>
+<button type="button" (click)="getPosts()">Make request</button>
+
+<div *ngFor="let d of data">
+  <h3>{{d.title}}</h3>
+  <b>post {{d.id}} di utente #: {{d.userId}}</b>
+  <div>
+    {{d.body}}
+  </div>
+  <hr>
+</div>
