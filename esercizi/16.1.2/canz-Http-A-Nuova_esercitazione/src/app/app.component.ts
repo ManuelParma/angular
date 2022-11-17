@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { AlbumList } from './albumList.model';
-import { Album } from './album.model';
-import { Song } from './song.model';
 import { HttpClient } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { Album } from './album.model';
+import { AlbumList } from './albumList.model';
+import { Song } from './song.model';
 
 
 @Component({
@@ -13,11 +13,13 @@ import { HttpClient } from '@angular/common/http';
 
 export class AppComponent {
   
-  selectedOption : string;
   title = "Benvenuti al canzoniere";
+  selectedOption: string;
   albums = AlbumList;
   selectedAlbum: Album = AlbumList[0];
-  songList: Song[];  //Questo vettore va passato al componente sonList
+  songList: Song[];
+  showList: boolean = true;
+  filteredSong: Song[];
 
   constructor(public http: HttpClient) { }
   ngOnInit() {
@@ -28,18 +30,29 @@ export class AppComponent {
     this.http.get<Song[]>("https://my-json-server.typicode.com/malizia-g/hotel/songlist").subscribe(d => this.songList = d);
   }
 
-  /*Il metodo on CLick controlla cerca l'album selezionato in base al titolo e aggiunge la canzone
-  Selezionata alla songList*/
-  onClick(t: HTMLInputElement  ,d : HTMLInputElement, l :HTMLInputElement ) : boolean
-  {
+  onClick(t: HTMLInputElement, d: HTMLInputElement, l: HTMLInputElement): boolean {
     this.selectedAlbum = AlbumList.find((album: Album) => album.title == this.selectedOption);
     this.songList.push(new Song(this.selectedAlbum, new Date(d.value), Number(l.value), t.value));
-    //Dopo aver aggiunto la canzone azzero tutti i campi
-    t.value ="";
-    d.value ="";
-    l.value="";
-    this.selectedOption = undefined;
+    t.value = "";
+    d.value = "";
+    l.value = "";
     return false;
+  }
+
+  toggleList(): void {
+    this.showList = !this.showList;
+  }
+
+  toggleFavorite(song: Song): void {
+    song.colorClass = this.isFavorite(song) ? 'text-body' : 'text-danger';
+  }
+
+  isFavorite(song: Song): boolean {
+    return song.colorClass == 'text-danger';
+  }
+
+  onChange(): void {
+    this.filteredSong = this.songList.filter(sL => sL.album.title == this.selectedOption);
   }
 
 }

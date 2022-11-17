@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'; //Importa Il modulo http
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DettagliAlbumComponent } from './dettagli-album/dettagli-album.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DettagliAlbumComponent
   ],
   imports: [
     BrowserModule,
